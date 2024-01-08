@@ -1,5 +1,6 @@
 import { useState } from "react"; // Importing useState hook from react for managing local state
 import { Textarea } from "@nextui-org/react";
+import { saveNote } from "./lib/utils";
 
 // This is the main component for the home page
 export default function Home() {
@@ -12,6 +13,7 @@ export default function Home() {
     // Saving the current value of the text input to userNote
     console.log(userNote);
     console.log("Save button clicked");
+    saveNote(userNote);
   };
 
   return (

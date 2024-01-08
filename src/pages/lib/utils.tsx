@@ -1,11 +1,5 @@
-// Importing createClient from supabase-js to create a new Supabase client
 import { createClient } from "@supabase/supabase-js";
-
-// The URL of the Supabase project
 const supabaseUrl = "https://dffakphxqngbdrnnupzo.supabase.co";
-
-// The public Supabase key, retrieved from environment variables
-// If the key is not found, an empty string is used as a fallback
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY ?? "";
 
 // Creating a new Supabase client using the project URL and the public key
@@ -17,13 +11,19 @@ export const saveNote = async (note: string): Promise<void> => {
   try {
     // Attempt to insert the note into the "notes" table in the database
     // The note is wrapped in an object with a "text" property
+    const id = Number(
+      BigInt(Math.floor(Math.random() * Number.MAX_SAFE_INTEGER))
+    );
     const { data, error } = await supabase
       .from("notes")
-      .insert([{ text: note }]);
+      .insert([{ id: id, note: note }])
+      .select();
 
     // If an error occurred during the insert operation, throw the error
     if (error) {
       throw error;
+    } else {
+      console.log("Note saved successfully");
     }
   } catch (error) {
     // If an error was thrown, log it to the console with a descriptive message
