@@ -16,14 +16,17 @@ export default function Home() {
 
   return (
     <div>
+      {/* !!!!!!!!! Replace this with nicer text component */}
       <Textarea
         label="Description"
         placeholder="Enter your description"
         className="max-w-xs"
-        value={userNote}
         value={userNote} // bind userNote state variable to the value of Textarea
         onChange={(e) => setUserNote(e.target.value)} // update userNote state variable when Textarea value changes
+        //make text black
+        style={{ color: "black" }}
       />
+      {/* !!!!!!!!! Replace this with nicer button component */}
       {/* Text input for the user to enter a note */}
       <button onClick={saveButtonClicked}>Save</button>{" "}
       {/* Save button to save the note */}
