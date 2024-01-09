@@ -4,7 +4,9 @@
 
 import { useRouter } from "next/router"; // Importing useRouter hook from Next.js for routing
 import { useEffect, useState } from "react"; // Importing useEffect and useState hooks from React
-import { supabase } from "../lib/utils"; // Importing supabase client for database operations
+import { supabase } from "./lib/utils"; // Importing supabase client for database operations
+import { Textarea } from "@nextui-org/react";
+import { saveNote } from "./lib/utils";
 
 // Functional component for the Note page
 const NotePage = () => {
@@ -35,13 +37,30 @@ const NotePage = () => {
     }
   };
 
+  // This function will be called when the save button is clicked
+  const saveButtonClicked = async () => {
+    // Saving the current value of the text input to userNote
+    const id = await saveNote(userNote);
+    console.log(id);
+    router.push(`/${id}`);
+  };
+
   // Rendering the note
   return (
     <div>
       {/* Displaying the note ID */}
       <h1>Note {id}</h1>
       {/* Displaying the note text */}
-      <p>{note}</p> // Displaying the note text
+      <Textarea
+        placeholder="Enter a note"
+        className="max-w-xs"
+        value={note || "Loading..."} // bind note state variable to the value of Textarea, if note is not available yet, display "Loading..."
+        onChange={(e) => setNote(e.target.value)} // update userNote state variable when Textarea value changes
+        //make text black
+        style={{ color: "black" }}
+      />
+      {/* !!!!!!!!! Replace this with nicer button component */}
+      <button onClick={saveButtonClicked}>Save</button>{" "}
     </div>
   );
 };
