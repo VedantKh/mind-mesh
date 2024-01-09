@@ -37,14 +37,6 @@ const NotePage = () => {
     }
   };
 
-  // This function will be called when the save button is clicked
-  const saveButtonClicked = async () => {
-    // Saving the current value of the text input to userNote
-    const id = await saveNote(userNote);
-    console.log(id);
-    router.push(`/${id}`);
-  };
-
   // Rendering the note
   return (
     <div>
@@ -55,12 +47,12 @@ const NotePage = () => {
         placeholder="Enter a note"
         className="max-w-xs"
         value={note || "Loading..."} // bind note state variable to the value of Textarea, if note is not available yet, display "Loading..."
-        onChange={(e) => setNote(e.target.value)} // update userNote state variable when Textarea value changes
+        readOnly
         //make text black
         style={{ color: "black" }}
       />
       {/* !!!!!!!!! Replace this with nicer button component */}
-      <button onClick={saveButtonClicked}>Save</button>{" "}
+      {/* <button onClick={saveButtonClicked}>Save</button>{" "} */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 
 // Function to save a note to the Supabase database
 // The function is asynchronous and returns a Promise that resolves to void
-export const saveNote = async (note: string, id: number): Promise<number> => {
+export const saveNote = async (note: string): Promise<number> => {
   try {
     // Attempt to insert the note into the "notes" table in the database
     // The note is wrapped in an object with a "text" property
@@ -30,5 +30,6 @@ export const saveNote = async (note: string, id: number): Promise<number> => {
   } catch (error) {
     // If an error was thrown, log it to the console with a descriptive message
     console.error("Error saving note: ", error);
+    return -1;
   }
 };
